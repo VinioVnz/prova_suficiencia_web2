@@ -1,0 +1,21 @@
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Tipo {
+  id          Int          @id @default(autoincrement())
+  nome        String
+  equipamentos Equipamento[]
+
+  @@map("tipos")
+}
+
+model Equipamento {
+  id       Int    @id @default(autoincrement())
+  nome     String
+  tipoId   Int
+  tipo     Tipo   @relation(fields: [tipoId], references: [id])
+
+  @@map("equipamentos")
+}
