@@ -1,0 +1,25 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+model Tipo {
+  id           Int           @id @default(autoincrement())
+  nome         String
+  equipamentos Equipamento[]
+
+  @@map("tipos")
+}
+
+model Equipamento {
+  id     Int    @id @default(autoincrement())
+  nome   String
+  tipoId Int
+  tipo   Tipo   @relation(fields: [tipoId], references: [id])
+
+  @@map("equipamentos")
+}
