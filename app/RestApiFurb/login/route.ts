@@ -1,3 +1,28 @@
+/**
+ * @swagger
+ * /RestApiFurb/login:
+ *   post:
+ *     tags:
+ *       - Autenticação
+ *     summary: Autentica um usuário e retorna um token JWT
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UserInput'
+ *     responses:
+ *       '200':
+ *         description: Login realizado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AuthResponse'
+ *       '400':
+ *         description: Campos de autenticação faltando
+ *       '401':
+ *         description: Credenciais inválidas
+ */
 import { NextResponse } from "next/server";
 import { verificarCredenciais } from "@/service/userService";
 import { generateToken } from "@/lib/jwt-auth";

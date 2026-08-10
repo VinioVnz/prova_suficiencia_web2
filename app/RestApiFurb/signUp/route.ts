@@ -1,3 +1,30 @@
+/**
+ * @swagger
+ * /RestApiFurb/signUp:
+ *   post:
+ *     tags:
+ *       - Autenticação
+ *     summary: Cadastra um novo usuário e retorna um token JWT
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UserInput'
+ *     responses:
+ *       '201':
+ *         description: Usuário criado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AuthResponse'
+ *       '400':
+ *         description: Campos obrigatórios faltando
+ *       '409':
+ *         description: Username já está em uso
+ *       '500':
+ *         description: Erro interno ao criar usuário
+ */
 import { NextResponse } from "next/server";
 import { criarUsuario } from "@/service/userService";
 import { generateToken } from "@/lib/jwt-auth";

@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Web 2 - Prova de Suficiência
 
-## Getting Started
+Este projeto é uma aplicação Next.js com API REST usando Prisma e autenticação JWT.
 
-First, run the development server:
+## Pré-requisitos
+
+- Node.js 20+ instalado
+- npm instalado
+- Banco de dados PostgreSQL disponível
+
+## Configuração do ambiente
+
+1. Copie o arquivo de exemplo de variáveis de ambiente:
+
+2. Preencha o arquivo `.env` com os valores corretos:
+
+```env
+NEON_DB_STRING="postgresql://usuario:senha@endereco:porta/banco?schema=public"
+JWT_SECRET="uma-senha-secreta-qualquer"
+```
+
+> `NEON_DB_STRING` deve apontar para sua instância PostgreSQL.
+> `JWT_SECRET` é usado para assinar os tokens JWT.
+
+## Instalar dependências
+
+```bash
+npm install
+```
+
+## Gerar cliente Prisma e criar o banco
+
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
+
+## Popular o banco de dados (seed)
+
+```bash
+npx prisma db seed
+```
+
+O seed cria tipos e equipamentos iniciais no banco.
+
+## Rodar o projeto
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra no navegador:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `http://localhost:3000` para o site principal
+- `http://localhost:3000/docs` para a documentação Swagger da API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Endpoints principais
 
-## Learn More
+- `/RestApiFurb/equipamentos`
+- `/RestApiFurb/equipamentos/{id}`
+- `/RestApiFurb/login`
+- `/RestApiFurb/signUp`
+- `/RestApiFurb/users`
+- `/RestApiFurb/users/{id}`
 
-To learn more about Next.js, take a look at the following resources:
+## Observações
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- A API usa autenticação JWT para rotas protegidas em `/RestApiFurb/users` e `/RestApiFurb/equipamentos/{id}`.
+- O seed não popula usuários, apenas tipos e equipamentos.
+- Se houver problemas de conexão, verifique o valor de `NEON_DB_STRING` no `.env`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts úteis
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` — inicia o servidor em modo de desenvolvimento
+- `npm run build` — gera a aplicação para produção
+- `npm run start` — inicia a aplicação em modo de produção
+- `npm run lint` — verifica qualidade de código com ESLint

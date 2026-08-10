@@ -1,3 +1,80 @@
+/**
+ * @swagger
+ * /RestApiFurb/equipamentos/{id}:
+ *   get:
+ *     tags:
+ *       - Equipamentos
+ *     summary: Busca equipamento por ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       '200':
+ *         description: Equipamento encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Equipamento'
+ *       '404':
+ *         description: Equipamento não encontrado
+ *   put:
+ *     tags:
+ *       - Equipamentos
+ *     summary: Atualiza um equipamento existente
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/EquipamentoInput'
+ *     responses:
+ *       '200':
+ *         description: Equipamento atualizado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 equipamento:
+ *                   $ref: '#/components/schemas/Equipamento'
+ *       '404':
+ *         description: Equipamento não encontrado
+ *   delete:
+ *     tags:
+ *       - Equipamentos
+ *     summary: Remove um equipamento
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       '200':
+ *         description: Equipamento removido com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 text:
+ *                   type: string
+ *       '404':
+ *         description: Equipamento não encontrado
+ */
 import { NextResponse } from "next/server";
 import { atualizarEquipamento, buscarEquipamentoPorId, removerEquipamento } from "@/service/equipamentoService";
 import { withAuth } from "@/lib/jwt-auth";
